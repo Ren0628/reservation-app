@@ -150,5 +150,7 @@ return [
     'attributes' => [
         "password" => "パスワード",
         "email" => "メールアドレス",
+        "checkin" => "チェックイン",
+        "checkout" => "チェックアウト",
     ],
 ];
