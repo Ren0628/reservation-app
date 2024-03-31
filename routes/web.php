@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AccommondationController;
+use App\Http\Controllers\RoomController;
+use App\Http\Controllers\ReservationController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -16,14 +19,10 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+Route::get('/', [AccommondationController::class, 'index'])->middleware('auth')->name('home');
+Route::get('/reservation/{accommondation}', [ReservationController::class, 'create'])->middleware('auth')->name('reservation');
+Route::post('/reservation/{accommondation}', [ReservationController::class, 'store'])->middleware('auth')->name('reservation.store');
+Route::get('/rooms/{accommondation}', [RoomController::class, 'index'])->middleware('auth')->name('rooms');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
